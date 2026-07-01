@@ -2,7 +2,8 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Эта строка критически важна для мобильных устройств -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Оплата успешна</title>
     <style>
       body {
@@ -15,20 +16,23 @@
         height: 100vh;
         margin: 0;
         text-align: center;
-        padding: 20px;
+        padding: 10px; /* Небольшие отступы по краям экрана */
+        box-sizing: border-box;
       }
       .card {
         background: white;
-        padding: 40px;
+        padding: 24px; /* Чуть меньше отступов внутри */
         border-radius: 16px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        max-width: 400px;
-        width: 100%;
+        width: 100%; /* Растягиваем на всю доступную ширину */
+        max-width: 500px; /* Но не шире 500px на больших экранах */
+        box-sizing: border-box; /* Чтобы padding не увеличивал ширину больше 100% */
       }
       h1 {
         color: #00c853;
         margin: 0 0 16px 0;
-        font-size: 24px;
+        font-size: 22px;
+        line-height: 1.2;
       }
       p {
         color: #333;
@@ -40,30 +44,3 @@
         display: inline-block;
         background-color: #007AFF;
         color: white;
-        padding: 16px 32px;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 16px;
-        transition: background-color 0.2s;
-      }
-      .btn:active {
-        background-color: #0055AA;
-      }
-      .note {
-        margin-top: 20px;
-        font-size: 12px;
-        color: #888;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="card">
-      <h1>✅ Оплата успешна!</h1>
-      <p>Ваш платёж прошёл. Теперь вернитесь в приложение, чтобы увидеть обновлённый баланс.</p>
-      <!-- ВАЖНО: замените ссылку ниже на ваш реальный Deep Link -->
-      <a href="myapp://payment/success" class="btn">Вернуться в приложение</a>
-      <p class="note">Если приложение не открывается автоматически, нажмите кнопку ещё раз.</p>
-    </div>
-  </body>
-</html>
