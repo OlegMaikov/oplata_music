@@ -1,262 +1,163 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Оплата успешна — НейроМьюзик</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Оплата успешна</title>
     <style>
-        :root {
-            --primary-color: #6366F1;
-            --primary-hover: #4F46E5;
-            --success-color: #10B981;
-            --background-gradient: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --text-main: #F8FAFC;
-            --text-secondary: #94A3B8;
-        }
+      :root {
+        --primary-color: #007AFF;
+        --success-color: #10B981;
+        --bg-color: #F3F4F6;
+        --card-bg: #FFFFFF;
+        --text-main: #1F2937;
+        --text-muted: #4B5563;
+      }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--bg-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        text-align: center;
+        padding: 16px;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--background-gradient);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
-        }
+      .card {
+        background: var(--card-bg);
+        padding: 32px 24px;
+        border-radius: 24px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 440px;
+        box-sizing: border-box;
+      }
 
-        .container {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 24px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 440px;
-            text-align: center;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+      .icon-container {
+        width: 72px;
+        height: 72px;
+        background-color: #ECFDF5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px auto;
+      }
 
-        /* Анимация появления карточки */
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+      .icon-success {
+        color: var(--success-color);
+        width: 40px;
+        height: 40px;
+      }
 
-        /* Красивая SVG-галочка успеха */
-        .success-checkmark {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 24px;
-        }
+      h1 {
+        color: var(--text-main);
+        margin: 0 0 12px 0;
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
 
-        .success-checkmark .circle {
-            stroke-dasharray: 166;
-            stroke-dashoffset: 166;
-            stroke-width: 4;
-            stroke-miterlimit: 10;
-            stroke: var(--success-color);
-            fill: none;
-            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-        }
+      p {
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin: 0 0 32px 0;
+        font-size: 16px;
+      }
 
-        .success-checkmark .check {
-            transform-origin: 50% 50%;
-            stroke-dasharray: 48;
-            stroke-dashoffset: 48;
-            stroke-width: 5;
-            stroke: var(--success-color);
-            fill: none;
-            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
-        }
+      .btn {
+        display: block;
+        width: 100%;
+        background-color: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        padding: 16px 24px;
+        border-radius: 16px;
+        font-weight: 600;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+      }
 
-        @keyframes stroke {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
+      .btn:hover {
+        background-color: #0062CC;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 122, 255, 0.35);
+      }
 
-        h1 {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to right, #FFFFFF, #E2E8F0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+      .btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 6px rgba(0, 122, 255, 0.2);
+      }
 
-        .badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success-color);
-            padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        p {
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 700;
-            padding: 16px 28px;
-            border-radius: 16px;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
-            width: 100%;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .timer-info {
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .spinner {
-            width: 14px;
-            height: 14px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .footer-note {
-            margin-top: 32px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-            line-height: 1.4;
-        }
+      .footer-text {
+        font-size: 12px;
+        color: #9CA3AF;
+        margin-top: 24px;
+      }
     </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- Анимированная иконка галочки -->
-        <svg class="success-checkmark" viewBox="0 0 52 52">
-            <circle class="circle" cx="26" cy="26" r="25"/>
-            <path class="check" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+  </head>
+  <body>
+    <div class="card">
+      <div class="icon-container">
+        <!-- SVG галочки успеха -->
+        <svg class="icon-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
         </svg>
-
-        <h1>Платёж успешно завершён</h1>
-        <div class="badge">+10 генераций</div>
-
-        <p>Спасибо! Пакет из 10 генераций успешно оплачен. Нажмите кнопку ниже для возврата в приложение «НейроМьюзик» и зачисления нот.</p>
-
-        <!-- Основная кнопка перенаправления -->
-        <a href="neuromusic://payment_success" class="btn" id="returnBtn">
-            <span>Вернуться в приложение</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        </a>
-
-        <!-- Индикатор автоматического перенаправления -->
-        <div class="timer-info">
-            <div class="spinner"></div>
-            <span>Перенаправление в приложение через <span id="countdown">3</span> сек...</span>
-        </div>
-
-        <div class="footer-note">
-            Если приложение не открылось автоматически, пожалуйста, нажмите на синюю кнопку выше.
-        </div>
+      </div>
+      
+      <h1>Оплата успешно завершена!</h1>
+      <p>Спасибо! Баланс вашего личного кабинета успешно пополнен на 10 нот. Вы будете перенаправлены в приложение автоматически.</p>
+      
+      <!-- Ссылки ведут на наши deep link схемы, которые перехватит MainActivity -->
+      <a href="neuromusic://pay/success" id="returnButton" class="btn">Вернуться в приложение</a>
+      
+      <div class="footer-text">
+        Если приложение не открылось автоматически, нажмите кнопку выше.
+      </div>
     </div>
 
     <script>
-        // Список поддерживаемых схем для кросс-девайсной надежности
-        const appSchemes = [
-            "neuromusic://payment_success",
-            "yourapp://pay/success"
-        ];
+      // Список deep link адресов для максимальной совместимости
+      const deepLinks = [
+        "neuromusic://pay/success",
+        "yourapp://pay/success"
+      ];
 
-        // Функция попытки перенаправления
-        function redirectToApp() {
-            // Пробуем открыть по основной схеме
-            window.location.href = appSchemes[0];
-            
-            // Запасной таймаут: если первая схема не сработала, пробуем вторую
-            setTimeout(function() {
-                window.location.href = appSchemes[1];
-            }, 500);
-        }
-
-        // Таймер обратного отсчета для UX
-        let secondsLeft = 3;
-        const countdownEl = document.getElementById("countdown");
+      // Функция автоперенаправления при загрузке страницы
+      function tryToRedirect() {
+        let index = 0;
         
-        const interval = setInterval(function() {
-            secondsLeft--;
-            if (countdownEl) {
-                countdownEl.textContent = secondsLeft;
-            }
-            if (secondsLeft <= 0) {
-                clearInterval(interval);
-                redirectToApp();
-            }
-        }, 1000);
+        function next() {
+          if (index < deepLinks.length) {
+            window.location.href = deepLinks[index];
+            index++;
+            setTimeout(next, 500); // Пробуем следующую схему через 500мс, если первая не сработала
+          }
+        }
+        
+        next();
+      }
 
-        // Привязываем ручной клик по кнопке на обе схемы
-        document.getElementById("returnBtn").addEventListener("click", function(e) {
-            e.preventDefault();
-            redirectToApp();
-        });
+      // Запускаем перенаправление при загрузке
+      window.onload = function() {
+        tryToRedirect();
+      };
 
-        // Прямой мгновенный запуск при загрузке страницы (для максимальной скорости)
-        window.onload = function() {
-            // Небольшая задержка, чтобы пользователь успел увидеть красивую галочку успеха
-            setTimeout(redirectToApp, 800);
-        };
+      // Дублируем обработчик на кнопке на случай блокировок браузером
+      document.getElementById("returnButton").addEventListener("click", function(e) {
+        // Мы даем браузеру выполнить переход по умолчанию на neuromusic://pay/success,
+        // но на всякий случай дублируем в JS.
+        setTimeout(function() {
+          window.location.href = "yourapp://pay/success";
+        }, 300);
+      });
     </script>
-</body>
+  </body>
 </html>
