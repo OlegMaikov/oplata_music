@@ -1,46 +1,262 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Эта строка критически важна для мобильных устройств -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Оплата успешна</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Оплата успешна — НейроМьюзик</title>
     <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background-color: #f5f5f5;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        text-align: center;
-        padding: 10px; /* Небольшие отступы по краям экрана */
-        box-sizing: border-box;
-      }
-      .card {
-        background: white;
-        padding: 24px; /* Чуть меньше отступов внутри */
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        width: 100%; /* Растягиваем на всю доступную ширину */
-        max-width: 500px; /* Но не шире 500px на больших экранах */
-        box-sizing: border-box; /* Чтобы padding не увеличивал ширину больше 100% */
-      }
-      h1 {
-        color: #00c853;
-        margin: 0 0 16px 0;
-        font-size: 22px;
-        line-height: 1.2;
-      }
-      p {
-        color: #333;
-        line-height: 1.5;
-        margin: 0 0 24px 0;
-        font-size: 16px;
-      }
-      .btn {
-        display: inline-block;
-        background-color: #007AFF;
-        color: white;
+        :root {
+            --primary-color: #6366F1;
+            --primary-hover: #4F46E5;
+            --success-color: #10B981;
+            --background-gradient: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #F8FAFC;
+            --text-secondary: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--background-gradient);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 24px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Анимация появления карточки */
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Красивая SVG-галочка успеха */
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+        }
+
+        .success-checkmark .circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 4;
+            stroke-miterlimit: 10;
+            stroke: var(--success-color);
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .success-checkmark .check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            stroke-width: 5;
+            stroke: var(--success-color);
+            fill: none;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+        }
+
+        @keyframes stroke {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #FFFFFF, #E2E8F0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success-color);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 16px 28px;
+            border-radius: 16px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .timer-info {
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer-note {
+            margin-top: 32px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Анимированная иконка галочки -->
+        <svg class="success-checkmark" viewBox="0 0 52 52">
+            <circle class="circle" cx="26" cy="26" r="25"/>
+            <path class="check" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+
+        <h1>Платёж успешно завершён</h1>
+        <div class="badge">+10 генераций</div>
+
+        <p>Спасибо! Пакет из 10 генераций успешно оплачен. Нажмите кнопку ниже для возврата в приложение «НейроМьюзик» и зачисления нот.</p>
+
+        <!-- Основная кнопка перенаправления -->
+        <a href="neuromusic://payment_success" class="btn" id="returnBtn">
+            <span>Вернуться в приложение</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+
+        <!-- Индикатор автоматического перенаправления -->
+        <div class="timer-info">
+            <div class="spinner"></div>
+            <span>Перенаправление в приложение через <span id="countdown">3</span> сек...</span>
+        </div>
+
+        <div class="footer-note">
+            Если приложение не открылось автоматически, пожалуйста, нажмите на синюю кнопку выше.
+        </div>
+    </div>
+
+    <script>
+        // Список поддерживаемых схем для кросс-девайсной надежности
+        const appSchemes = [
+            "neuromusic://payment_success",
+            "yourapp://pay/success"
+        ];
+
+        // Функция попытки перенаправления
+        function redirectToApp() {
+            // Пробуем открыть по основной схеме
+            window.location.href = appSchemes[0];
+            
+            // Запасной таймаут: если первая схема не сработала, пробуем вторую
+            setTimeout(function() {
+                window.location.href = appSchemes[1];
+            }, 500);
+        }
+
+        // Таймер обратного отсчета для UX
+        let secondsLeft = 3;
+        const countdownEl = document.getElementById("countdown");
+        
+        const interval = setInterval(function() {
+            secondsLeft--;
+            if (countdownEl) {
+                countdownEl.textContent = secondsLeft;
+            }
+            if (secondsLeft <= 0) {
+                clearInterval(interval);
+                redirectToApp();
+            }
+        }, 1000);
+
+        // Привязываем ручной клик по кнопке на обе схемы
+        document.getElementById("returnBtn").addEventListener("click", function(e) {
+            e.preventDefault();
+            redirectToApp();
+        });
+
+        // Прямой мгновенный запуск при загрузке страницы (для максимальной скорости)
+        window.onload = function() {
+            // Небольшая задержка, чтобы пользователь успел увидеть красивую галочку успеха
+            setTimeout(redirectToApp, 800);
+        };
+    </script>
+</body>
+</html>
